@@ -24,6 +24,11 @@
 </main>
 <script>
   const p = new URLSearchParams(location.search);
+  // Login feito pelo painel local (automacao/painel_tiktok.py): devolve o código direto para ele.
+  if ((p.get("state") || "").startsWith("painel")) {
+    document.getElementById("msg").textContent = "Voltando para o painel…";
+    location.replace("http://localhost:8765/callback" + location.search);
+  }
   const codigo = p.get("code");
   const el = document.getElementById("codigo");
   if (codigo) { el.textContent = codigo; }
